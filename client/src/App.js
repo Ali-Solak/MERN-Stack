@@ -1,13 +1,14 @@
 import { React, useState, useEffect } from 'react';
 import { Container, AppBar, Typography, Grow, Grid, Box } from '@material-ui/core';
-import memories from './images/memories.png';
 import Posts from './components/posts/Posts.js';
 import Form from './components/form/Form.js';
 import useStyle from './styles.js';
 import { useDispatch } from 'react-redux';
 import { getPosts } from './store/actions/posts'
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 function App() {
+  const smallScreen = useMediaQuery('(max-width:600px)');
 
   const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function App() {
       </AppBar>
       <Grow in>
         <Container>
-          <Grid classname={classes.mainContainer} container justify="space-between" alignItems="stretch" spacing={3}>
+          <Grid container classname={classes.mainContainer} direction={smallScreen?"column-reverse":""}justify="space-between" alignItems="stretch" spacing={3}>
             <Grid item xs={12} sm={7}>
               <Posts setCurrentId={setCurrentId} />
             </Grid>
